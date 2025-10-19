@@ -50,3 +50,4 @@ function preloadAboutImage() {
 
 // Initialize image preloading
 document.addEventListener('DOMContentLoaded', preloadAboutImage);
+
