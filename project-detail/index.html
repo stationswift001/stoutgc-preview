@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail - STOUT General Contracting</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../portfolio.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <a href="/" class="logo-link">
+                    <div class="logo-icon">
+                        <img src="../resources/SGC.svg" alt="STOUT General Contracting Logo" class="logo-image" />
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content project-detail-main">
+        <div class="project-detail-container">
+            <!-- Back Button -->
+            <div class="back-button-container">
+                    <a href="/portfolio" class="back-button">
+                    <span class="back-arrow">←</span>
+                    Back to Portfolio
+                </a>
+            </div>
+            
+            <div class="project-content">
+                <!-- Left Column - Text Content -->
+                <div class="project-text-column">
+                    <h1 class="project-title" id="project-title">Project Title</h1>
+                    
+                    <div class="project-description" id="project-description">
+                        <p>At Stout General Contracting, our goal is to have satisfied clients. We understand it's more than just four walls and a roof, it's your home. This project showcases our commitment to quality craftsmanship and attention to detail.</p>
+                    </div>
+                    
+                    <div class="project-testimonials" id="project-testimonials">
+                        <div class="testimonial">
+                            <p class="testimonial-text">"Shane was knowledgeable, kind, and professional throughout the entire project. I would definitely recommend him for any construction needs."</p>
+                            <p class="testimonial-author">- Gay M., University Park</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Image Gallery -->
+                <div class="project-gallery-column">
+                    <div class="project-gallery">
+                        <div class="gallery-main">
+                            <img id="main-gallery-image" src="../resources/home/1.1.jpg" alt="Project main image" />
+                        </div>
+                        <div class="gallery-thumbnails" id="gallery-thumbnails">
+                            <!-- Thumbnails will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
