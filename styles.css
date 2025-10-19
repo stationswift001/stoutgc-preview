@@ -241,6 +241,9 @@ body {
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
+    display: inline-block;
+    text-decoration: none;
+    z-index: 1;
 }
 
 .cta-button::before {
@@ -263,6 +266,7 @@ body {
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    text-decoration: none;
 }
 
 /* Carousel Navigation */
