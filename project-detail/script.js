@@ -3,7 +3,7 @@
 // Sample project data
 const projects = {
     1: {
-        title: "Modern Residential Development",
+        title: "Lakewood",
         description: "At Stout General Contracting, our goal is to have satisfied clients. We understand it's more than just four walls and a roof, it's your home. This modern residential development showcases our commitment to contemporary design and quality craftsmanship.",
         testimonials: [
             {
@@ -12,14 +12,27 @@ const projects = {
             }
         ],
         images: [
-            "resources/home/1.1.jpg",
-            "resources/home/1.2.JPG",
-            "resources/home/1.3.JPG",
-            "resources/home/1.5.JPG"
+            "../resources/1/1.1.jpg",
+            "../resources/1/1.2.JPG",
+            "../resources/1/1.3.JPG",
+            "../resources/1/1.4.JPG",
+            "../resources/1/1.5.JPG",
+            "../resources/1/1.6.JPG",
+            "../resources/1/1.7.JPG",
+            "../resources/1/1.8.JPG",
+            "../resources/1/1.9.JPG",
+            "../resources/1/1.10.JPG",
+            "../resources/1/1.11.JPG",
+            "../resources/1/1.12.JPG",
+            "../resources/1/1.13.JPG",
+            "../resources/1/1.14.JPG",
+            "../resources/1/1.15.JPG",
+            "../resources/1/1.16.JPG",
+            "../resources/1/1.17.JPG"
         ]
     },
     2: {
-        title: "Contemporary Home Project",
+        title: "Forest Hills",
         description: "This contemporary home project demonstrates our expertise in modern architecture and sustainable building practices. We worked closely with the client to create a space that perfectly balances functionality with aesthetic appeal.",
         testimonials: [
             {
@@ -28,10 +41,24 @@ const projects = {
             }
         ],
         images: [
-            "resources/home/1.2.JPG",
-            "resources/home/1.3.JPG",
-            "resources/home/1.5.JPG",
-            "resources/home/1.8.JPG"
+            "../resources/2/2.1.jpg",
+            "../resources/2/2.2.jpg",
+            "../resources/2/2.3.jpg",
+            "../resources/2/2.4.jpg",
+            "../resources/2/2.5.jpg",
+            "../resources/2/2.6.jpg",
+            "../resources/2/2.7.jpg",
+            "../resources/2/2.8.jpg",
+            "../resources/2/2.9.jpg",
+            "../resources/2/2.10.jpg",
+            "../resources/2/2.11.jpg",
+            "../resources/2/2.12.jpg",
+            "../resources/2/2.13.jpg",
+            "../resources/2/2.14.jpg",
+            "../resources/2/2.15.jpg",
+            "../resources/2/2.16.jpg",
+            "../resources/2/2.17.jpg",
+            "../resources/2/2.18.jpg"
         ]
     },
     3: {
@@ -133,12 +160,6 @@ function loadProjectData(projectId) {
     const titleElement = document.getElementById('project-title');
     if (titleElement) {
         titleElement.textContent = project.title;
-    }
-    
-    // Update project description
-    const descriptionElement = document.getElementById('project-description');
-    if (descriptionElement) {
-        descriptionElement.innerHTML = `<p>${project.description}</p>`;
     }
     
     // Update testimonials

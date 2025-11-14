@@ -2,17 +2,17 @@
 
 /* Main Content Adjustments */
 .portfolio-main {
-    margin-top: 100px; /* Account for fixed header */
+    margin-top: 80px; /* Account for fixed header */
     padding: 2rem 0;
     background: #f8f9fa;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 80px);
 }
 
 .project-detail-main {
-    margin-top: 100px; /* Account for fixed header */
+    margin-top: 80px; /* Account for fixed header */
     padding: 2rem 0;
     background: #f8f9fa;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 80px);
 }
 
 /* Portfolio Container */
@@ -47,15 +47,16 @@
 /* Portfolio Grid */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     padding: 0 2rem 3rem 2rem;
-    max-width: 1000px;
+    width: 100%;
     margin: 0 auto;
 }
 
 .portfolio-item {
     text-align: center;
+    width: 100%;
 }
 
 .portfolio-link {
@@ -96,6 +97,31 @@
     font-weight: 500;
     color: #2c3e50;
     margin-top: 0.5rem;
+}
+
+/* Coming Soon */
+.coming-soon-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.coming-soon {
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+.coming-soon p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #2c3e50;
+    font-style: italic;
+    margin: 0;
 }
 
 /* Back Button */
@@ -139,15 +165,11 @@
 
 /* Project Detail Layout */
 .project-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-    align-items: start;
-}
-
-/* Project Text Column */
-.project-text-column {
-    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .project-title {
@@ -159,6 +181,7 @@
 }
 
 .project-description {
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
@@ -196,19 +219,16 @@
     text-align: right;
 }
 
-/* Project Gallery Column */
-.project-gallery-column {
-    position: relative;
-}
-
+/* Project Gallery */
 .project-gallery {
-    position: sticky;
-    top: 120px; /* Account for header */
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .gallery-main {
     width: 100%;
-    height: 400px;
+    max-width: 100%;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -217,9 +237,9 @@
 
 .gallery-main img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
 .gallery-thumbnails {
@@ -269,9 +289,11 @@
 @media (max-width: 768px) {
     .portfolio-main,
     .project-detail-main {
-        margin-top: 80px;
+        margin-top: 70px;
         padding: 1rem 0;
+        min-height: calc(100vh - 70px);
     }
+    
     
     .portfolio-container,
     .project-detail-container {
@@ -295,11 +317,6 @@
         height: 200px;
     }
     
-    .project-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
     .project-title {
         font-size: 2rem;
         margin-bottom: 1.5rem;
@@ -317,9 +334,6 @@
         font-size: 1rem;
     }
     
-    .gallery-main {
-        height: 300px;
-    }
     
     .gallery-thumbnails {
         grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
@@ -342,6 +356,13 @@
 }
 
 @media (max-width: 480px) {
+    .portfolio-main,
+    .project-detail-main {
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+    }
+    
+    
     .portfolio-title {
         font-size: 2rem;
     }
@@ -358,9 +379,6 @@
         font-size: 1.8rem;
     }
     
-    .gallery-main {
-        height: 250px;
-    }
     
     .gallery-thumbnails {
         grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
@@ -414,7 +432,4 @@
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .project-content {
-        grid-template-columns: 1fr;
-    }
 }
