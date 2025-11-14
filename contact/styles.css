@@ -2,10 +2,10 @@
 
 /* Main Content Adjustments */
 .contact-main {
-    margin-top: 100px; /* Account for fixed header */
+    margin-top: 80px; /* Account for fixed header */
     padding: 2rem 0;
     background: #f8f9fa;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 80px);
 }
 
 /* Contact Container */
@@ -142,8 +142,9 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .contact-main {
-        margin-top: 80px;
+        margin-top: 70px;
         padding: 1rem 0;
+        min-height: calc(100vh - 70px);
     }
     
     .contact-container {
@@ -195,6 +196,11 @@
 }
 
 @media (max-width: 480px) {
+    .contact-main {
+        margin-top: 60px;
+        min-height: calc(100vh - 60px);
+    }
+    
     .contact-title {
         font-size: 2rem;
     }
