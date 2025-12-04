@@ -1,131 +1,5 @@
-// Project Detail Page JavaScript
-
-// Sample project data
-const projects = {
-    1: {
-        title: "Lakewood",
-        description: "At Stout General Contracting, our goal is to have satisfied clients. We understand it's more than just four walls and a roof, it's your home. This modern residential development showcases our commitment to contemporary design and quality craftsmanship.",
-        testimonials: [
-            {
-                text: "Shane was knowledgeable, kind, and professional throughout the entire project. I would definitely recommend him for any construction needs.",
-                author: "Gay M., University Park"
-            }
-        ],
-        images: [
-            "../resources/1/1.1.jpg",
-            "../resources/1/1.2.JPG",
-            "../resources/1/1.3.JPG",
-            "../resources/1/1.4.JPG",
-            "../resources/1/1.5.JPG",
-            "../resources/1/1.6.JPG",
-            "../resources/1/1.7.JPG",
-            "../resources/1/1.8.JPG",
-            "../resources/1/1.9.JPG",
-            "../resources/1/1.10.JPG",
-            "../resources/1/1.11.JPG",
-            "../resources/1/1.12.JPG",
-            "../resources/1/1.13.JPG",
-            "../resources/1/1.14.JPG",
-            "../resources/1/1.15.JPG",
-            "../resources/1/1.16.JPG",
-            "../resources/1/1.17.JPG"
-        ]
-    },
-    2: {
-        title: "Forest Hills",
-        description: "This contemporary home project demonstrates our expertise in modern architecture and sustainable building practices. We worked closely with the client to create a space that perfectly balances functionality with aesthetic appeal.",
-        testimonials: [
-            {
-                text: "Bill and Betsy H - Las Colinas, TX: We recently completed a 2,000 sq ft condo remodel with Shane and his team. The professionalism, ideas, and quality of subcontractors exceeded our expectations.",
-                author: "Bill and Betsy H., Las Colinas, TX"
-            }
-        ],
-        images: [
-            "../resources/2/2.1.jpg",
-            "../resources/2/2.2.jpg",
-            "../resources/2/2.3.jpg",
-            "../resources/2/2.4.jpg",
-            "../resources/2/2.5.jpg",
-            "../resources/2/2.6.jpg",
-            "../resources/2/2.7.jpg",
-            "../resources/2/2.8.jpg",
-            "../resources/2/2.9.jpg",
-            "../resources/2/2.10.jpg",
-            "../resources/2/2.11.jpg",
-            "../resources/2/2.12.jpg",
-            "../resources/2/2.13.jpg",
-            "../resources/2/2.14.jpg",
-            "../resources/2/2.15.jpg",
-            "../resources/2/2.16.jpg",
-            "../resources/2/2.17.jpg",
-            "../resources/2/2.18.jpg"
-        ]
-    },
-    3: {
-        title: "Luxury Home Construction",
-        description: "Our luxury home construction project represents the pinnacle of residential building excellence. Every detail was carefully planned and executed to create a truly exceptional living space.",
-        testimonials: [
-            {
-                text: "Leon D. - Plano: Shane handled our termite damage repair with incredible flexibility, speed, and cost-effectiveness. Highly recommended!",
-                author: "Leon D., Plano"
-            }
-        ],
-        images: [
-            "resources/home/1.3.JPG",
-            "resources/home/1.5.JPG",
-            "resources/home/1.8.JPG",
-            "resources/home/1.17.JPG"
-        ]
-    },
-    4: {
-        title: "Custom Home Design",
-        description: "This custom home design project showcases our ability to bring unique architectural visions to life. From concept to completion, we ensured every detail met the highest standards.",
-        testimonials: [
-            {
-                text: "The attention to detail and quality of workmanship exceeded our expectations. Shane and his team made our dream home a reality.",
-                author: "Sarah & Mike T., Dallas"
-            }
-        ],
-        images: [
-            "resources/home/1.5.JPG",
-            "resources/home/1.8.JPG",
-            "resources/home/1.17.JPG",
-            "resources/home/2.3.jpg"
-        ]
-    },
-    5: {
-        title: "Modern Architecture Project",
-        description: "Our modern architecture project demonstrates innovative design solutions and cutting-edge construction techniques. This project pushed the boundaries of contemporary residential construction.",
-        testimonials: [
-            {
-                text: "Working with STOUT was an incredible experience. Their expertise in modern design and construction is unmatched in the industry.",
-                author: "Jennifer L., Highland Park"
-            }
-        ],
-        images: [
-            "resources/home/1.8.JPG",
-            "resources/home/1.17.JPG",
-            "resources/home/2.3.jpg",
-            "resources/home/2.7.jpg"
-        ]
-    },
-    6: {
-        title: "Residential Construction",
-        description: "This residential construction project highlights our comprehensive approach to home building. From foundation to finishing touches, we delivered exceptional quality and attention to detail.",
-        testimonials: [
-            {
-                text: "The entire construction process was smooth and professional. Shane kept us informed every step of the way and delivered exactly what was promised.",
-                author: "Robert & Lisa K., Plano"
-            }
-        ],
-        images: [
-            "resources/home/1.17.JPG",
-            "resources/home/2.3.jpg",
-            "resources/home/2.7.jpg",
-            "resources/home/2.18.jpg"
-        ]
-    }
-};
+// Project Detail Page JavaScript - Static Version
+// All content is preloaded in HTML, this script only handles visibility and interactions
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeProjectDetail();
@@ -136,122 +10,73 @@ function initializeProjectDetail() {
     const urlParams = new URLSearchParams(window.location.search);
     const projectId = urlParams.get('project') || '1';
     
-    // Load project data
-    loadProjectData(projectId);
+    // Show the correct project section
+    showProject(projectId);
     
     // Initialize gallery functionality
     initializeGallery();
-    
-    // Add smooth animations
-    addAnimations();
 }
 
-function loadProjectData(projectId) {
-    const project = projects[projectId];
-    if (!project) {
-        console.error('Project not found:', projectId);
-        return;
-    }
-    
-    // Update page title
-    document.title = `${project.title} - STOUT General Contracting`;
-    
-    // Update project title
-    const titleElement = document.getElementById('project-title');
-    if (titleElement) {
-        titleElement.textContent = project.title;
-    }
-    
-    // Update testimonials
-    const testimonialsElement = document.getElementById('project-testimonials');
-    if (testimonialsElement) {
-        testimonialsElement.innerHTML = project.testimonials.map(testimonial => `
-            <div class="testimonial">
-                <p class="testimonial-text">"${testimonial.text}"</p>
-                <p class="testimonial-author">- ${testimonial.author}</p>
-            </div>
-        `).join('');
-    }
-    
-    // Update gallery images
-    updateGallery(project.images);
-}
-
-function updateGallery(images) {
-    const mainImage = document.getElementById('main-gallery-image');
-    const thumbnailsContainer = document.getElementById('gallery-thumbnails');
-    
-    if (!mainImage || !thumbnailsContainer) return;
-    
-    // Update main image with high priority
-    mainImage.setAttribute('loading', 'eager');
-    mainImage.setAttribute('fetchpriority', 'high');
-    mainImage.src = images[0];
-    mainImage.alt = 'Project image';
-    
-    // Clear existing thumbnails
-    thumbnailsContainer.innerHTML = '';
-    
-    // Create thumbnails with lazy loading
-    images.forEach((imageSrc, index) => {
-        const thumbnail = document.createElement('div');
-        thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
-        
-        // Create image element with lazy loading for thumbnails beyond the first few
-        const img = document.createElement('img');
-        if (index < 4) {
-            // Load first 4 thumbnails immediately (visible in viewport)
-            img.setAttribute('loading', 'eager');
-        } else {
-            // Lazy load remaining thumbnails
-            img.setAttribute('loading', 'lazy');
-        }
-        img.src = imageSrc;
-        img.alt = `Project thumbnail ${index + 1}`;
-        img.setAttribute('decoding', 'async');
-        
-        thumbnail.appendChild(img);
-        
-        thumbnail.addEventListener('click', () => {
-            // Preload the clicked image before switching
-            const preloadImg = new Image();
-            preloadImg.onload = () => {
-                mainImage.src = imageSrc;
-                mainImage.setAttribute('loading', 'eager');
-            };
-            preloadImg.src = imageSrc;
-            
-            // Update active thumbnail
-            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-            thumbnail.classList.add('active');
-        });
-        
-        thumbnailsContainer.appendChild(thumbnail);
+function showProject(projectId) {
+    // Hide all project sections
+    const allSections = document.querySelectorAll('.project-section');
+    allSections.forEach(section => {
+        section.classList.remove('active');
     });
     
-    // Use Intersection Observer to load remaining thumbnails as they come into view
-    setupThumbnailLazyLoading();
+    // Show the selected project
+    const targetSection = document.querySelector(`.project-section[data-project="${projectId}"]`);
+    if (targetSection) {
+        targetSection.classList.add('active');
+        
+        // Update page title
+        const title = targetSection.querySelector('.project-title').textContent;
+        document.title = `${title} - StoutGC`;
+    } else {
+        // Fallback to project 1 if not found
+        const defaultSection = document.querySelector('.project-section[data-project="1"]');
+        if (defaultSection) {
+            defaultSection.classList.add('active');
+            document.title = 'Project Detail - StoutGC';
+        }
+    }
 }
 
 function initializeGallery() {
-    const mainImage = document.getElementById('main-gallery-image');
-    if (!mainImage) return;
+    // Get the active project's gallery
+    const activeSection = document.querySelector('.project-section.active');
+    if (!activeSection) return;
     
-    // Add loading state with smooth transition
+    const mainImage = activeSection.querySelector('.main-gallery-image');
+    const thumbnails = activeSection.querySelectorAll('.thumbnail');
+    
+    if (!mainImage || !thumbnails.length) return;
+    
+    // Add click handlers to thumbnails
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', function() {
+            const thumbnailImg = this.querySelector('img');
+            if (!thumbnailImg) return;
+            
+            // Update main image
+            mainImage.src = thumbnailImg.src;
+            mainImage.alt = thumbnailImg.alt.replace('thumbnail', 'main image');
+            
+            // Update active thumbnail
+            thumbnails.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    
+    // Add smooth transition for main image
     mainImage.addEventListener('load', function() {
         this.style.opacity = '1';
         this.style.transition = 'opacity 0.3s ease-in-out';
     });
     
-    // Show loading state while image loads
-    mainImage.addEventListener('loadstart', function() {
-        this.style.opacity = '0.5';
-    });
-    
-    // Preload next image when main image is displayed
+    // Preload next image when main image loads
     mainImage.addEventListener('load', function() {
-        const thumbnails = document.querySelectorAll('.thumbnail');
-        const activeThumbnail = document.querySelector('.thumbnail.active');
+        const activeThumbnail = activeSection.querySelector('.thumbnail.active');
         if (activeThumbnail && thumbnails.length > 1) {
             const thumbnailsArray = Array.from(thumbnails);
             const currentIndex = thumbnailsArray.indexOf(activeThumbnail);
@@ -264,143 +89,36 @@ function initializeGallery() {
         }
     });
     
-    // Add keyboard navigation for thumbnails
+    // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-        const activeThumbnail = document.querySelector('.thumbnail.active');
+        const activeThumbnail = activeSection.querySelector('.thumbnail.active');
         if (!activeThumbnail) return;
         
-        const thumbnails = Array.from(document.querySelectorAll('.thumbnail'));
-        const currentIndex = thumbnails.indexOf(activeThumbnail);
+        const thumbnailsArray = Array.from(thumbnails);
+        const currentIndex = thumbnailsArray.indexOf(activeThumbnail);
         
         if (e.key === 'ArrowLeft' && currentIndex > 0) {
-            thumbnails[currentIndex - 1].click();
-        } else if (e.key === 'ArrowRight' && currentIndex < thumbnails.length - 1) {
-            thumbnails[currentIndex + 1].click();
+            thumbnailsArray[currentIndex - 1].click();
+        } else if (e.key === 'ArrowRight' && currentIndex < thumbnailsArray.length - 1) {
+            thumbnailsArray[currentIndex + 1].click();
         }
     });
 }
 
-function addAnimations() {
-    // Add intersection observer for content animation
-    const contentElements = document.querySelectorAll('.project-text-column, .project-gallery-column');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Initially hide content elements
-    contentElements.forEach((element, index) => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        element.style.transition = `opacity 0.8s ease ${index * 0.2}s, transform 0.8s ease ${index * 0.2}s`;
-        observer.observe(element);
-    });
-    
-    // Add hover effects for testimonials
-    const testimonials = document.querySelectorAll('.testimonial');
-    testimonials.forEach(testimonial => {
-        testimonial.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
-            this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
-        });
-        
-        testimonial.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '';
-        });
-    });
-}
-
-// Add responsive gallery adjustments
+// Responsive gallery adjustments
 function adjustGallery() {
-    const gallery = document.querySelector('.project-gallery');
-    const thumbnails = document.querySelector('.gallery-thumbnails');
+    const activeSection = document.querySelector('.project-section.active');
+    if (!activeSection) return;
     
-    if (!gallery || !thumbnails) return;
+    const thumbnails = activeSection.querySelector('.gallery-thumbnails');
+    if (!thumbnails) return;
     
     if (window.innerWidth <= 768) {
-        // Stack thumbnails vertically on mobile
         thumbnails.style.gridTemplateColumns = 'repeat(auto-fit, minmax(60px, 1fr))';
     } else {
-        // Horizontal layout on desktop
         thumbnails.style.gridTemplateColumns = 'repeat(auto-fit, minmax(80px, 1fr))';
     }
 }
 
-// Call on load and resize
 window.addEventListener('load', adjustGallery);
 window.addEventListener('resize', adjustGallery);
-
-// Preload gallery images with priority strategy
-function preloadGalleryImages(images) {
-    // Preload only the first few images immediately (main + first 3 thumbnails)
-    const priorityImages = images.slice(0, 4);
-    
-    priorityImages.forEach((src, index) => {
-        const img = new Image();
-        if (index === 0) {
-            // Main image gets highest priority
-            img.setAttribute('fetchpriority', 'high');
-        }
-        img.src = src;
-    });
-    
-    // Preload remaining images with lower priority after a delay
-    setTimeout(() => {
-        const remainingImages = images.slice(4);
-        remainingImages.forEach(src => {
-            const img = new Image();
-            img.setAttribute('fetchpriority', 'low');
-            img.src = src;
-        });
-    }, 1000); // Wait 1 second before preloading remaining images
-}
-
-// Setup lazy loading for thumbnails using Intersection Observer
-function setupThumbnailLazyLoading() {
-    const thumbnails = document.querySelectorAll('.gallery-thumbnails img[loading="lazy"]');
-    
-    if (!('IntersectionObserver' in window)) {
-        // Fallback: load all images if IntersectionObserver is not supported
-        thumbnails.forEach(img => {
-            img.loading = 'eager';
-        });
-        return;
-    }
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                // Image is already loaded via src attribute, just ensure it's visible
-                img.setAttribute('loading', 'eager');
-                observer.unobserve(img);
-            }
-        });
-    }, {
-        rootMargin: '50px' // Start loading 50px before image enters viewport
-    });
-    
-    thumbnails.forEach(img => imageObserver.observe(img));
-}
-
-// Initialize image preloading when project data is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const projectId = urlParams.get('project') || '1';
-    const project = projects[projectId];
-    
-    if (project) {
-        preloadGalleryImages(project.images);
-    }
-});
