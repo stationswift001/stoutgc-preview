@@ -183,22 +183,43 @@ function updateGallery(images) {
     
     if (!mainImage || !thumbnailsContainer) return;
     
-    // Update main image
+    // Update main image with high priority
+    mainImage.setAttribute('loading', 'eager');
+    mainImage.setAttribute('fetchpriority', 'high');
     mainImage.src = images[0];
     mainImage.alt = 'Project image';
     
     // Clear existing thumbnails
     thumbnailsContainer.innerHTML = '';
     
-    // Create thumbnails
+    // Create thumbnails with lazy loading
     images.forEach((imageSrc, index) => {
         const thumbnail = document.createElement('div');
         thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
-        thumbnail.innerHTML = `<img src="${imageSrc}" alt="Project thumbnail ${index + 1}" />`;
+        
+        // Create image element with lazy loading for thumbnails beyond the first few
+        const img = document.createElement('img');
+        if (index < 4) {
+            // Load first 4 thumbnails immediately (visible in viewport)
+            img.setAttribute('loading', 'eager');
+        } else {
+            // Lazy load remaining thumbnails
+            img.setAttribute('loading', 'lazy');
+        }
+        img.src = imageSrc;
+        img.alt = `Project thumbnail ${index + 1}`;
+        img.setAttribute('decoding', 'async');
+        
+        thumbnail.appendChild(img);
         
         thumbnail.addEventListener('click', () => {
-            // Update main image
-            mainImage.src = imageSrc;
+            // Preload the clicked image before switching
+            const preloadImg = new Image();
+            preloadImg.onload = () => {
+                mainImage.src = imageSrc;
+                mainImage.setAttribute('loading', 'eager');
+            };
+            preloadImg.src = imageSrc;
             
             // Update active thumbnail
             document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
@@ -207,15 +228,40 @@ function updateGallery(images) {
         
         thumbnailsContainer.appendChild(thumbnail);
     });
+    
+    // Use Intersection Observer to load remaining thumbnails as they come into view
+    setupThumbnailLazyLoading();
 }
 
 function initializeGallery() {
     const mainImage = document.getElementById('main-gallery-image');
     if (!mainImage) return;
     
-    // Add loading state
+    // Add loading state with smooth transition
     mainImage.addEventListener('load', function() {
         this.style.opacity = '1';
+        this.style.transition = 'opacity 0.3s ease-in-out';
+    });
+    
+    // Show loading state while image loads
+    mainImage.addEventListener('loadstart', function() {
+        this.style.opacity = '0.5';
+    });
+    
+    // Preload next image when main image is displayed
+    mainImage.addEventListener('load', function() {
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const activeThumbnail = document.querySelector('.thumbnail.active');
+        if (activeThumbnail && thumbnails.length > 1) {
+            const thumbnailsArray = Array.from(thumbnails);
+            const currentIndex = thumbnailsArray.indexOf(activeThumbnail);
+            const nextIndex = (currentIndex + 1) % thumbnailsArray.length;
+            const nextImg = thumbnailsArray[nextIndex].querySelector('img');
+            if (nextImg) {
+                const preloadImg = new Image();
+                preloadImg.src = nextImg.src;
+            }
+        }
     });
     
     // Add keyboard navigation for thumbnails
@@ -295,12 +341,57 @@ function adjustGallery() {
 window.addEventListener('load', adjustGallery);
 window.addEventListener('resize', adjustGallery);
 
-// Preload gallery images
+// Preload gallery images with priority strategy
 function preloadGalleryImages(images) {
-    images.forEach(src => {
+    // Preload only the first few images immediately (main + first 3 thumbnails)
+    const priorityImages = images.slice(0, 4);
+    
+    priorityImages.forEach((src, index) => {
         const img = new Image();
+        if (index === 0) {
+            // Main image gets highest priority
+            img.setAttribute('fetchpriority', 'high');
+        }
         img.src = src;
     });
+    
+    // Preload remaining images with lower priority after a delay
+    setTimeout(() => {
+        const remainingImages = images.slice(4);
+        remainingImages.forEach(src => {
+            const img = new Image();
+            img.setAttribute('fetchpriority', 'low');
+            img.src = src;
+        });
+    }, 1000); // Wait 1 second before preloading remaining images
+}
+
+// Setup lazy loading for thumbnails using Intersection Observer
+function setupThumbnailLazyLoading() {
+    const thumbnails = document.querySelectorAll('.gallery-thumbnails img[loading="lazy"]');
+    
+    if (!('IntersectionObserver' in window)) {
+        // Fallback: load all images if IntersectionObserver is not supported
+        thumbnails.forEach(img => {
+            img.loading = 'eager';
+        });
+        return;
+    }
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                // Image is already loaded via src attribute, just ensure it's visible
+                img.setAttribute('loading', 'eager');
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px' // Start loading 50px before image enters viewport
+    });
+    
+    thumbnails.forEach(img => imageObserver.observe(img));
 }
 
 // Initialize image preloading when project data is loaded
