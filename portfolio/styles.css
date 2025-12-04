@@ -193,7 +193,7 @@
 }
 
 /* Testimonials */
-.project-testimonials {
+/* .project-testimonials {
     margin-top: 2rem;
 }
 
@@ -217,7 +217,7 @@
     font-weight: 600;
     color: #2c3e50;
     text-align: right;
-}
+} */
 
 /* Project Gallery */
 .project-gallery {
@@ -326,13 +326,13 @@
         font-size: 1rem;
     }
     
-    .testimonial {
+    /* .testimonial {
         padding: 1rem;
     }
     
     .testimonial-text {
         font-size: 1rem;
-    }
+    } */
     
     
     .gallery-thumbnails {
